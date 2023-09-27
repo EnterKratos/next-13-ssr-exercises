@@ -14,11 +14,35 @@ function CheckoutExercise() {
   );
 
   React.useEffect(() => {
+    let cartContent = [];
+    try {
+      cartContent = JSON.parse(window.localStorage.getItem('cart-content'));
+      if (cartContent === null) {
+        cartContent = [];
+      }
+    }
+    catch {
+      console.warn('cart-content was not valid');
+    }
+
     dispatch({
       type: 'client-init',
-      initialState: []
+      initialState: cartContent
     });
   }, []);
+
+  React.useEffect(() => {
+    if (items === null) {
+      return;
+    }
+
+    window.localStorage.setItem('cart-content', JSON.stringify(items?.map(i => {
+      return {
+        id: i.id,
+        quantity: i.quantity
+      }
+    })));
+  }, [items]);
 
   return (
     <>

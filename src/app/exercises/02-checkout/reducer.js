@@ -1,8 +1,12 @@
 import { produce } from 'immer';
+import DATA from './data';
 
 function reducer(state, action) {
   if (action.type === 'client-init') {
-    return action.initialState;
+    return action.initialState.map(item => ({
+      ...DATA.find(catalogItem => catalogItem.id === item.id),
+      quantity: item.quantity
+    }));
   }
 
   return produce(state, (draftState) => {
