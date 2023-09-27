@@ -16,7 +16,7 @@ function Clock() {
   }, []);
 
   return (
-    <p className="clock">{format(time, 'hh:mm:ss.S a')}</p>
+    <p suppressHydrationWarning className="clock">{format(time, 'hh:mm:ss.S a')}</p>
   );
 }
 
