@@ -1,6 +1,10 @@
 import { produce } from 'immer';
 
 function reducer(state, action) {
+  if (action.type === 'client-init') {
+    return action.initialState;
+  }
+
   return produce(state, (draftState) => {
     switch (action.type) {
       case 'add-item': {

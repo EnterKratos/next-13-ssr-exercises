@@ -10,8 +10,15 @@ import './styles.css';
 function CheckoutExercise() {
   const [items, dispatch] = React.useReducer(
     reducer,
-    []
+    null
   );
+
+  React.useEffect(() => {
+    dispatch({
+      type: 'client-init',
+      initialState: []
+    });
+  }, []);
 
   return (
     <>
